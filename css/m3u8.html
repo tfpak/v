@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
+<title>33UU免费解析</title>
+<style type="text/css">body,html,.content{background-color:black;padding: 0;margin: 0;width:100%;height:100%;color:#999;}</style>
+<script src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./ckplayer/ckplayer.js" charset="utf-8"></script>
+<link rel="stylesheet" href="./css/DPlayer.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/dplayer/1.5.1/DPlayer.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/hls.js/0.8.4/hls.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script type="text/javascript" src="./js/tools.js?ver=20171118"></script>
+</head>
+<body style="overflow-y:hidden;">
+<div id="loading" class="content" style="font-weight:bold;padding-top:90px;" align="center">正在加载播放中,请稍等...</div>
+<div id="a1" class="content" style="display:none;"></div>
+<div id="error" class="content" style="display:none;font-weight:bold;padding-top:90px;" align="center"></div>
+<script type="text/javascript">
+var vid=GetQueryString('id') ? GetQueryString('id') : GetQueryString('url');
+if(vid.indexOf('.m3u8')>0){
+	$('#loading').hide();
+	$('#a1').show();
+	var isiPad = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
+	if(isiPad){
+		document.getElementById('a1').innerHTML = '<video src="'+vid+'" controls="controls" autoplay="autoplay" width="100%" height="100%" poster="image/loading_wap.gif"></video>';
+	}else{
+		var m3u8Type=GetQueryString('type');
+		if (m3u8Type=='hls') {
+			var dplayer = new DPlayer({
+				element: document.getElementById("a1"),
+				autoplay: true,
+				video: {
+					url: vid,
+					type: 'hls'
+				}
+			});
+		}else{
+			var flashvars={f:'/videojx/ckplayer/m3u8.swf',a:vid,c:0,s:4,lv:0,p:1,v:100,b:1,e:0,my_title:GetQueryString('title')};
+			var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
+			CKobject.embedSWF('ckplayer/ckplayer.swf','a1','ckplayer_a1','100%','100%',flashvars,params);
+		}
+	}
+}else{
+$('#error').html('亲!暂不支持该格式');
+}
+
+function GetQueryString(name){
+	 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	 var r = window.location.search.substr(1).match(reg);
+	 if(r!=null)return  unescape(r[2]); return null;
+}
+</script>
+
+</body>
+</html>
