@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>天源视频解析https://tfpak.github.io/v/m3u8.html?url= .m3u8解析</title>
+<style type="text/css">body,html,div{padding: 0;margin: 0;width:100%;height:100%;psotion:relative;"}</style>
+</head>
+<body>
+<div id="a1" style="psotion:relative;"></div>
+<script type="text/javascript" src="./ckplayer/ckplayer.v.js" charset="utf-8"></script>
+<script type="text/javascript">
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+    var vid = GetQueryString("url");
+	var index = vid.indexOf("https://");
+	if(index == 0&&document.location.protocol=="http:"){
+		document.location.protocol="https:";
+	}else
+	{
+
+	}
+	
+var videoObject = {
+		container: '#a1',//"#"代表容器的ID，"."或""代表容器的class
+		variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+		autoplay:true,//自动播放
+		video:vid//视频地址
+	};
+	var player=new ckplayer(videoObject);
+  </script>
+  <span style="display:none;"><script src="http://vpf.3vkj.net/vp/z_stat.php?id=1262233409&web_id=1262233409" language="JavaScript"></script></span>
+</body>
+</html>
